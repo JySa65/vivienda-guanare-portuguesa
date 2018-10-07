@@ -8,7 +8,8 @@ class Inicio(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Inicio, self).get_context_data(**kwargs)
-        context['usuario'] = Usuario.objects.all().count()
+        context['usuario'] = Usuario.objects.all().exclude(
+            pk=self.request.user.pk).count()
         return context
 
 
