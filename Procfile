@@ -1,1 +1,1 @@
-web: gunicorn vivienda.wsgi --log-file -
+web: gunicorn vivienda.wsgi

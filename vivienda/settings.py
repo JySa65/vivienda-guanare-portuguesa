@@ -2,9 +2,9 @@ from vivienda.local_settings import *
 import os
 import dj_database_url
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 MIDDLEWARE += [
      'whitenoise.middleware.WhiteNoiseMiddleware',
