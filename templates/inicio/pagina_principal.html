@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Solicitud de vivienda</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicons
+    ================================================== -->
+    <!-- <link rel="shortcut icon" href="{% static 'img/favicon.ico'%}" type="image/x-icon">
+<link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png'%}">
+<link rel="apple-touch-icon" sizes="72x72" href="{% static 'img/apple-touch-icon-72x72.png'%}">
+<link rel="apple-touch-icon" sizes="114x114" href="{% static 'img/apple-touch-icon-114x114.png'%}"> -->
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome/css/font-awesome.css'%}">
+
+    <!-- Stylesheet
+    ================================================== -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <!-- Navigation
+    ==========================================-->
+    <nav id="menu" class="navbar navbar-secondary navbar-fixed-top" style="background-color: rgba(255,255,255,.6);">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header" style="margin-top: -15px;">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    style="margin-top: 27px; margin-right: 50px;margin-bottom: -13px; background-color: darkgrey;">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top"><img class="mylogo" src="{% static 'assets/img/logocompleto.png' %}"
+                        class="img-responsive"> </div>
+            <style type="text/css">
+                .bold {
+                    font-weight: bold;
+                    color: black;
+                    font-size: 18px;
+                }
+            </style>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#about" class="page-scroll bold">Nosotros </a></li>
+                    <li><a href="#services" class="page-scroll bold">Fotos </a></li>
+                    <li><a href="{% url 'login' %}" class="page-scroll bold">Login</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- Header -->
+    <header id="header">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="{% static 'assets/img/intro-2.png'%}" alt="Chania">
+                    <div class="carousel-caption">
+                        <div style="height: 50px;margin-bottom: 60vh; width: 100%;background-color: rgba(255,255,255,.8); ">
+                            <h1 style="color: #ae1111; ">Ministerio de Habitát y Vivienda</h1>
+                        </div>
+                    </div>
+                </div>
+                </a>
+
+                <div class="item">
+                    <img src="{% static 'assets/img/intro.jpg'%}" alt="Chicago">
+                    <div class="carousel-caption">
+                        <div style="height: 50px;margin-bottom: 60vh; width: 100%;background-color: rgba(255,255,255,.8); ">
+                            <h1 style="color: #ae1111; ">Ministerio de Habitát y Vivienda</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img src="{% static 'assets/img/intro-3.jpg'%}" alt="New York" style="width: 100%; height: 100%;">
+                    <div class="carousel-caption">
+                        <div style="height: 50px;margin-bottom: 60vh; width: 100%;background-color: rgba(255,255,255,.8); ">
+                            <h1 style="color: #ae1111; ">Ministerio de Habitát y Vivienda</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </header>
+    <!-- About Section -->
+    <div id="about">
+        <div class="container">
+            <div class="section-title text-center center">
+                <a href="#" class="page-scroll bold">
+                    <h2>Sobre Nosotros</h2>
+                </a>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <center>
+                            <h3 class="bold">Misión</h3>
+                        </center>
+                        <p> Ejercer la rectoría del Sistema Nacional de Vivienda y Hábitat mediante la
+                            participación protagónica del poder comunal, a través de la formulación de
+                            políticas y planes de desarrollo que permitan la industrialización del sector, el
+                            acceso al financiamiento, la asistencia técnica y la supervisión oportuna, orientada
+                            hacia la satisfacción progresiva del derecho humano a una vivienda y hábitat
+                            dignos que humanicen las relaciones familiares, vecinales y comunitarias. </p>
+
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <center>
+                            <h3 class="bold">Visión</h3>
+                        </center>
+                        <p>Ser la institución modelo del estado venezolano en el Sistema de Seguridad Social
+                            que garantice la participación protagónica de las comunidades, a fin de procurar a
+                            las familias la satisfacción progresiva del derecho a vivienda y hábitat dignos,
+                            saludables y pertinentes, así como la ocupación racional del territorio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Services Section -->
+    <div id="services" class="text-center">
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1 section-title">
+                <h2>Fotos</h2>
+                <hr>
+                <p class="bold">Fotos de las obras realizadas por la gran misión Vivienda Venezuela</p>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-3">
+                    <img src="{% static 'assets/img/a.jpg'%}" class="img-rounded img-responsive" alt="">
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <img src="{% static 'assets/img/hola.jpg'%}" class="img-rounded img-responsive" alt="">
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <img src="{% static 'assets/img/maria.jpg'%}" class="img-rounded img-responsive" alt="">
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <img src="{% static 'assets/img/descarga.jpg'%}" class="img-rounded img-responsive" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="container text-center">
+            <div class="fnav">
+                <br><br><br>
+                <p class="bold">Copyright &copy; <span id="ano"></span> Mision Vivienda. Desarrollado por Castillo M. y Colmenarez H.</p>
+                <script>
+                    var ano = document.querySelector("#ano");
+                    var date = new Date().getFullYear();
+                    ano.innerText = date
+                </script>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- <script type="text/javascript" src="{% static 'js/main.js' %}"></script> -->
+    <script type="text/javascript">
+        $('.carousel').carousel()
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

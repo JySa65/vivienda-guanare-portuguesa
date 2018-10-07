@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title_page %}Administración Usuarios{% endblock %}
+{% block context %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 lead">
+            <ol class="breadcrumb">
+                <li class="active">Usuario</li>
+                <li><a href="{% url 'usuario:list' %}">Listado Usuario</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="container-flat-form">
+        {% if user.exist %}
+        <div class="title-flat-form">Usuario: {{ user.user.get_full_name }}</div>
+        {% else %}
+        <div class="title-flat-form">Registrar un nuevo usuario</div>
+        {% endif %}
+        <form autocomplete="off" method="POST">
+                {% for field in form %}
+                    {% if field.errors %}
+                    <div class="group-material">
+                        <div class="alert alert-danger" role="alert">
+                            <span>{{ field.label }}</span> {{ field.errors }}
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                    <div class="group-material">
+                        <span>Nacionalidad*</span>
+                        {{ form.tipo_cedula|add_class:"material-control tooltips-general"|attr:"data-toggle:tooltip"|attr:"data-toggle:top"|attr:"required:required"|attr:"title:EligeEl Tipo De Cedula"|attr:"autofocus" }}
+                    </div>
+                    <div class="group-material">
+                        {% if not user.exist %}
+                        {{ form.cedula|add_class:"material-control tooltips-general"|attr:"placeholder:Cedula"|attr:"required:required"|attr:"maxlength:8"|attr:"pattern:[0-9]{1,8}"|attr:"data-toggle:tooltip"|attr:"data-placement:top"|attr:"title:Escribela cedula del administrador" }}
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Cedula*</label>
+                        {% else %}
+                        <span>Cedula*</span>
+                        {{ form.cedula|add_class:"material-control tooltips-general"|attr:"required:required"|attr:"maxlength:8"|attr:"pattern:[0-9]{1,8}"|attr:"data-toggle:tooltip"|attr:"data-placement:top"|attr:"title:La Cedula Esta Ihnabilitada para la edición" }}
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        {% endif %}
+                    </div>
+                    <div class="group-material">
+                        {{ form.nombre|add_class:"material-control tooltips-general"|attr:"placeholder:Nombre"|attr:"required:required"|attr:"maxlength:60"|attr:"pattern:[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,60}"|attr:"data-toggle:tooltip"|attr:"data-placement:top"|attr:"title:Escribe el nombre del administrador" }}
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Nombre*</label>
+                    </div>
+                    <div class="group-material">
+                        {{ form.apellido|add_class:"material-control tooltips-general"|attr:"placeholder:Apellido"|attr:"required:required"|attr:"maxlength:60"|attr:"pattern:[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,60}"|attr:"data-toggle:tooltip"|attr:"data-placement:top"|attr:"title:Escribe el apellido del administrador" }}
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Apellido*</label>
+                    </div>
+                    <div class="group-material">
+                        {{ form.telefono|add_class:"material-control tooltips-general"|attr:"placeholder:Telefono"|attr:"maxlength:11"|attr:"pattern:[0-9]{1,11}"|attr:"data-toggle:tooltip"|attr:"data-placement:top"|attr:"title:Escribe el Telefono del administrador" }}
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Telefono</label>
+                    </div>
+                    <div class="group-material">
+                        {{ form.correo|add_class:"material-control tooltips-general"|attr:"placeholder:Correo Electronico"|attr:"pattern:^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$"|attr:"data-toggle:tooltip"|attr:"data-placement:top"|attr:"title:Escribe el Correo del administrador" }}
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Correo Electronico</label>
+                    </div>
+                    <div class="group-material">
+                        {{ form.fecha_nacimiento|add_class:"material-control tooltips-general"|attr:"placeholder:Fecha De Nacimiento"|attr:"data-toggle:tooltip"|attr:"data-placement:top"|attr:"title:Escribe la Fecha de Nacimiento del administrador" }}
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Fecha de Nacimiento</label>
+                        <script>document.querySelector("#id_fecha_nacimiento").type = "date"</script>
+                    </div>
+                    <div class="group-material">
+                        {{ form.direccion|add_class:"material-control tooltips-general"|attr:"placeholder:Direccion"|attr:"data-toggle:tooltip"|attr:"data-placement:top"|attr:"title:Escribe la direccion del administrador"|attr:"col:3" }}
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Direccion</label>
+                    </div>
+
+                    <p class="text-center">
+                        {% if not user.exist %}
+                        <button type="reset" class="btn btn-success btn-lg" style="margin-right: 20px;">
+                            <i class="zmdi zmdi-roller"></i>
+                            &nbsp;&nbsp; Limpiar
+                        </button>
+                        {% else %}
+                        <a {% if not profile %} href="{% url 'usuario:list' %}" {% else %} href="{% url 'usuario:detail_profile' %}" {% endif %} class="btn btn-success btn-lg" style="margin-right: 20px;">
+                            <i class="zmdi zmdi-mail-reply"></i>
+                            &nbsp;Regresar
+                        </a>
+                        {% endif %}
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            <i class="zmdi zmdi-floppy"></i>
+                            &nbsp;Guardar
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

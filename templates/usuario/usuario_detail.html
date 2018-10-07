@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_page %}Administración Usuarios{% endblock %}
+{% block context %}
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 lead">
+                <ol class="breadcrumb">
+                    <li class="active">Usuario</li>
+                    <li><a href="{% url 'usuario:list' %}">Listado Usuario</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+<div class="container-fluid" style="margin: 50px 0;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <img src="{% static 'assets/img/user02.png' %}" alt="calendar" class="img-responsive center-box" style="max-width: 110px;">
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
+            <h1>{{ object.get_full_name }}</h1>
+            <div class="title-flat-form" style="margin-bottom: 10px;">Información Básica</div>
+            <span><b>Cedula:</b> &nbsp;{{ object.ci }}</span>
+            <br>
+            <span><b>Nombre:</b> &nbsp;{{ object.nombre }}</span>
+            <br>
+            <span><b>Apellido:</b> &nbsp;{{ object.apellido }}</span>
+            <br>
+            <span>
+                <b>Fecha De Nacimiento:</b>
+                {% if object.fecha_nacimiento %}
+                &nbsp;{{ object.fecha_nacimiento }} - {{object.edad }} años
+                {% else %}
+                No Tiene Registrado
+                {% endif %}
+            </span>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-4 col-md-offset-3 text-justify lead">
+            <div class="title-flat-form" style="margin-bottom: 10px;">Información Adicional</div>
+            <span>
+                <b>Telefono:</b>
+                {% if object.telefono %}
+                &nbsp;{{ object.telefono }}
+                {% else %}
+                No Tiene Registrado
+                {% endif %}
+            </span>
+            <br>
+            <span>
+                <b>Correo Electronico:</b>
+                {% if object.correo %}
+                &nbsp;{{ object.correo }}
+                {% else %}
+                No Tiene Registrado
+                {% endif %}
+            </span>
+            <br>
+            <span>
+                <b>Dirección:</b>
+                {% if object.direccion %}
+                &nbsp;{{ object.direccion }}
+                {% else %}
+                No Tiene Registrado
+                {% endif %}
+            </span>
+            <br><br><br>
+            <p class="text-center">
+                <a {% if not profile %} href="{% url 'usuario:update' object.pk %}" {% else %} href="{% url 'usuario:update_profile' %}" {% endif %} class="btn btn-warning btn-lg tooltips-general"
+                    style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title="Actualizar Datos Del Usuario">
+                    <i class="zmdi zmdi-refresh"></i>
+                    &nbsp;Actualizar Datos
+                </a>
+                {% if not profile %}
+                <a href="{% url 'usuario:delete' object.pk %}" class="btn btn-danger btn-lg tooltips-general" style="margin-right: 10px;"
+                    data-toggle="tooltip" data-placement="left" title="Eliminar Usuario">
+                    <i class="zmdi zmdi-delete"></i>
+                    &nbsp;Eliminar
+                </a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

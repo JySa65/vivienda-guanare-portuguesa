@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_page %}Inicio{% endblock %}
+
+{% block context %}
+<section class="full-reset text-center" style="padding: 40px 0;">
+    <a href="{% url 'usuario:list' %}">
+        <article class="tile">
+            <div class="tile-icon full-reset"><i class="zmdi zmdi-face"></i></div>
+            <div class="tile-name all-tittles">Usuarios</div>
+            <div class="tile-num full-reset">{{ usuario }}</div>
+        </article>
+    </a>
+</section>
+{% endblock %}
