@@ -13,10 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import url, include, handler404
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
-from vivienda.views import Inicio, PaginaPrincipal
+from vivienda.views import Inicio, PaginaPrincipal, Custom404
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('^login/$', LoginView.as_view(), name='login'),
@@ -25,3 +26,5 @@ urlpatterns = [
     url('^$', PaginaPrincipal.as_view(), name="homepage"),
     url(r'^usuario/', include('usuario.urls', namespace="usuario"))
 ]
+
+handler404 = Custom404.as_view()

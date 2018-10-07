@@ -129,7 +129,6 @@ STATICFILES_DIRS = (
     os.path.join('static'),)
 
 STATIC_ROOT = 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'usuario.Usuario'
 

@@ -15,3 +15,7 @@ class Inicio(LoginRequiredMixin, TemplateView):
 
 class PaginaPrincipal(TemplateView):
     template_name = "inicio/pagina_principal.html"
+
+
+class Custom404(TemplateView):
+    template_name = "inicio/404.html"
