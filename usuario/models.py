@@ -27,6 +27,7 @@ class UsuarioManager(BaseUserManager):
 
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
+    id = models.BigIntegerField(primary_key = True)
     username = models.CharField(_('username'),
                                 max_length=40, null=False, unique=True)
     tipo_cedula = models.CharField(max_length=1, choices=(('V', 'V'), ('E', 'E')))
