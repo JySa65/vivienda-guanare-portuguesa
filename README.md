@@ -17,7 +17,7 @@
 
 1. Install Requirements.txt
 
-        pip install -r requirements.txt
+        (.env) ➜ pip install -r requirements.txt
 
 ## Run Project dev
 
