@@ -35,3 +35,5 @@
 ## App Page
 
 1. Access to page [localhost:8000/](http://localhost:8000/)
+
+1. Access Server Page [https://vivienda-2018-guanare.herokuapp.com/](https://vivienda-2018-guanare.herokuapp.com/)
