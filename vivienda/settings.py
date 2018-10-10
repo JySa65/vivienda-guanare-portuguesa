@@ -3,10 +3,6 @@ import dj_database_url
 
 DEBUG = False
 
-# MIDDLEWARE += [
-#      'whitenoise.middleware.WhiteNoiseMiddleware',
-# ]
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
