@@ -20,13 +20,13 @@ from vivienda.views import Inicio, PaginaPrincipal, Custom404
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url('^login/$', LoginView.as_view(), name='login'),
-    url('^logout/$', LogoutView.as_view(), name='logout'),
-    url('^solicitudes/', include('solicitudes.urls',namespace="solicitudes")),
-    url('^sector_zona/', include('sector_zona.urls',namespace="sector_zona")),
-    url('^inicio/$', Inicio.as_view(), name="inicio"),
+    url(r'^login/$', LoginView.as_view(), name='login'),
+    url(r'^logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^solicitudes/', include('solicitudes.urls',namespace="solicitudes")),
+    url(r'^sector_zona/', include('sector_zona.urls',namespace="sector_zona")),
+    url(r'^inicio/$', Inicio.as_view(), name="inicio"),
 
-    url('^$', PaginaPrincipal.as_view(), name="homepage"),
+    url(r'^$', PaginaPrincipal.as_view(), name="homepage"),
     url(r'^usuario/', include('usuario.urls', namespace="usuario"))
 ]
 
