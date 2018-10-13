@@ -38,6 +38,9 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     fecha_nacimiento = models.DateField(null=True, blank=True)
     correo = models.EmailField(blank=True, null=True)
     direccion = models.CharField(max_length=9999, blank=True, null=True)
+    is_solicitante = models.BooleanField(default=False)
+    is_trabajador = models.BooleanField(default=False)
+    # data required for admin django
     is_active = models.BooleanField(_('active'), default=True)
     is_staff = models.BooleanField(_('staff status'), default=False)
     is_superuser = models.BooleanField(_('superuser status'), default=False)
@@ -49,7 +52,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
 
     def __str__(self):
-        return str(self.cedula)
+        return "{}-{} {} {}".format(self.tipo_cedula, self.cedula, self.nombre, self.apellido)
 
     def get_full_name(self):
         return '{} {}'.format(self.nombre, self.apellido)

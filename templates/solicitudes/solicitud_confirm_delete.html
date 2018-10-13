@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_page %}Bienvenido {{user.username}}{% endblock %}
+
+{% block context %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 lead">
+            <ol class="breadcrumb">
+                <li class="active">Solicitante</li>
+                <li><a href="{% url 'solicitudes:list' %}">Listado Solicitantes</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="margin: 50px 0;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <img src="{% static 'assets/img/user02.png' %}" alt="calendar" class="img-responsive center-box" style="max-width: 110px;">
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
+            <h1 class="text-center">
+                ¿Esta Seguro De Eliminar La Solicitud: {{ object.pk }}? 
+                <br> 
+                No Podra Deshacer Esta Opción
+            </h1>
+            <div class="title-flat-form" style="margin-bottom: 10px;">Información</div>
+            <span><b>Solicitante:</b> &nbsp;{{ object.solicitante.get_full_name }}</span>
+            <br>
+            <span><b>Tipo:</b> &nbsp;
+                {% if object.tipo_solicitud == "1" %} Personal
+                {% elif object.tipo_solicitud == "2" %} Alto Riezgo 
+                {% elif object.tipo_solicitud == "3" %} Salud 
+                {% elif object.tipo_solicitud == "4" %} Institucional
+                {% else %} Tas Haciendo Algo Mal
+                {% endif %}
+            </span>
+            <br>
+            <span><b>Numero De Oficio:</b> &nbsp;{{ object.numero_de_oficio }}</span>
+            <br>
+            <span><b>Remitente: </b> {{ object.remitente }}</span>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-4 col-md-offset-3 text-justify lead">
+            <form method="post">{% csrf_token %}
+                <p class="text-center">
+                    <a href="{% url 'solicitudes:list' %}" class="btn btn-success btn-lg" style="margin-right: 20px;">
+                        <i class="zmdi zmdi-mail-reply"></i>
+                        &nbsp;Regresar
+                    </a>
+                    
+                    <button type="submit" class="btn btn-danger btn-lg tooltips-general" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title="Eliminar Usuario">
+                        <i class="zmdi zmdi-delete"></i>
+                        &nbsp;Eliminar
+                    </button>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

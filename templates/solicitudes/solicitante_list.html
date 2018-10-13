@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_page %}Bienvenido {{user.username}}{% endblock %}
+{% block context%}
+<div class="container-fluid">
+    <h2 class="text-center all-tittles">Listado de Solicitantes</h2>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <form action="" method="get">
+                <div class="col-sm-10 col-xs-10">
+                    <div class="group-material">
+                        <input type="search" name="q" class="material-control tooltips-general" placeholder="Busqueda por cedula nombre apellido" data-toggle="tooltip" data-placement="top" title="Aqui Podemos realizar una busqueda por cedula nombre o apellido" value="{{ request.GET.q }}" autocomplete="off">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    <button type="submit" class="btn btn-danger btn-default tooltips-general" data-toggle="tooltip" data-placement="top" title="Busqueda por cedula nombre o apellido">
+                        <i class="zmdi zmdi-search"></i>
+                    </button>
+                    <br><br><br><br>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-10 col-sm-offset-1">
+            {% for object in object_list %}
+            <div class="media media-hover">
+                <div class="media-left media-middle">
+                    <a href="{% url 'solicitudes:detail_solicitante' object.pk %}" class="tooltips-general" data-toggle="tooltip" data-placement="right" title="Más información de {{ object.get_full_name }}">
+                        <img class="media-object" src="{% static 'assets/img/user02.png' %}" alt="Libro" width="48" height="48">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <a href="{% url 'solicitudes:detail_solicitante' object.pk %}">
+                        <h4 class="media-heading">{{ object.get_full_name }}</h4>
+                    </a>
+                    <div class="pull-left">
+                        <strong>{{ object.cedula }}<br>
+                    </div>
+                    <p class="text-center pull-right">
+                        <a href="{% url 'solicitudes:detail_solicitante' object.pk %}" class="btn btn-info btn-default tooltips-general" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title="Más información de {{ object.get_full_name }}">
+                            <i class="zmdi zmdi-info-outline"></i>
+                        </a>
+                        <a href="{% url 'solicitudes:update_solicitante' object.pk %}" class="btn btn-warning btn-default tooltips-general" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title="Actualizar Datos De {{ object.get_full_name }}">
+                            <i class="zmdi zmdi-refresh"></i>
+                        </a>
+                        <a href="{% url 'solicitudes:delete_solicitante' object.pk %}" class="btn btn-danger btn-default tooltips-general" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title="Eliminar a {{ object.get_full_name }}">
+                            <i class="zmdi zmdi-delete"></i>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            {% empty %}
+                <h1 class="text-center">
+                    No Se Econtro Resultado
+                    <br>
+                    Con El Dato Ingresado
+                    <br>
+                    "{{ request.GET.q }}"
+                </h1>
+            {% endfor %} 
+           <br>
+        </div>
+        {% if is_paginated %}
+        <div class="col-sm-10 col-sm-offset-1">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li>
+                    <a href="?page={{ page_obj.previous_page_number }}">
+                    Anterior
+                    </a>
+                </li>
+                {% else %}
+                <li class="disabled">
+                    <a href="#">
+                        Anterior
+                    </a>
+                </li>
+                {% endif %}
+                
+                {% for page in paginator.page_range %}
+                <li {% if page == page_obj.number %}class="active"{% endif %}>
+                    <a href="?page={{ page }}">{{ page }}</a>
+                </li>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li>
+                    <a href="?page={{ page_obj.next_page_number }}">
+                        Siguiente
+                    </a>
+                </li>
+                {% else %}
+                <li {% if not page_obj.has_next %}class="disabled"{% endif %}>
+                    <a href="#">
+                        Siguiente
+                    </a>
+                </li>
+                {% endif %}
+            </ul>        
+        </div>
+      {% endif %}
+    </div>
+</div>
+
+{% endblock %}

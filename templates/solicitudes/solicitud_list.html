@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_page %}Bienvenido {{user.username}}{% endblock %}
+{% block context%}
+<div class="container-fluid">
+    <div class="container-fluid">
+        <h2 class="text-center all-tittles">Listado de Solicitudes</h2>
+                
+        <div class="div-table">
+            <div class="div-table-row div-table-head">
+                <div class="div-table-cell">Solicitante</div>
+                <div class="div-table-cell">Tipo</div>
+                <div class="div-table-cell">Numero De Oficio</div>
+                <div class="div-table-cell">Fecha</div>
+                <div class="div-table-cell">Opciones</div>
+            </div>
+            {% for object in object_list %}
+            <div class="div-table-row">
+                <div class="div-table-cell">{{ object.solicitante.ci }} {{ object.solicitante.get_full_name }}</div>
+                    <div class="div-table-cell">
+                            {% if object.tipo_solicitud == "1" %} Personal
+                            {% elif object.tipo_solicitud == "2" %} Alto Riezgo 
+                            {% elif object.tipo_solicitud == "3" %} Salud 
+                            {% elif object.tipo_solicitud == "4" %} Institucional
+                            {% else %} Tas Haciendo Algo Mal
+                            {% endif %}
+                    </div>
+                    <div class="div-table-cell">{{object.numero_de_oficio}}</div>
+                    <div class="div-table-cell">{{object.fecha}}</div>
+                    <div class="div-table-cell">
+                        <a href="{% url 'solicitudes:detail' object.pk %}" class="btn btn-info btn-default tooltips-general" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title="Más información de La Solicitud">
+                                <i class="zmdi zmdi-info-outline"></i>
+                            </a>
+                        <a class="btn btn-success btn-default tooltips-general" href="{% url 'solicitudes:update' object.pk %}" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title="Actualizar información de La Solicitud">
+                            <i class="zmdi zmdi-refresh"></i>
+                        </a>
+                        <a class="btn btn-danger btn-default tooltips-general" href="{% url 'solicitudes:delete' object.pk %}" style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title="Eliminar La Solicitud">
+                            <i class="zmdi zmdi-delete"></i>
+                        </a>
+                    </div>
+            </div>
+            {% empty%}
+            <h1 class="text-center">No Hay Solicitudes</h1>
+            {% endfor %} 
+        </div>
+               
+            
+        {% if is_paginated %}
+        <div class="col-sm-10 col-sm-offset-1">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li>
+                    <a href="?page={{ page_obj.previous_page_number }}">
+                    Anterior
+                    </a>
+                </li>
+                {% else %}
+                <li class="disabled">
+                    <a href="#">
+                        Anterior
+                    </a>
+                </li>
+                {% endif %}
+                
+                {% for page in paginator.page_range %}
+                <li {% if page == page_obj.number %}class="active"{% endif %}>
+                    <a href="?page={{ page }}">{{ page }}</a>
+                </li>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li>
+                    <a href="?page={{ page_obj.next_page_number }}">
+                        Siguiente
+                    </a>
+                </li>
+                {% else %}
+                <li {% if not page_obj.has_next %}class="disabled"{% endif %}>
+                    <a href="#">
+                        Siguiente
+                    </a>
+                </li>
+                {% endif %}
+            </ul>        
+        </div>
+      {% endif %}
+    </div>
+</div>
+
+{% endblock %}

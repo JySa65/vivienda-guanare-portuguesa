@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_page %}Bienvenido {{user.username}}{% endblock %}
+{% block context %}
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 lead">
+                <ol class="breadcrumb">
+                    <li class="active">Solicitante</li>
+                    <li><a href="{% url 'solicitudes:list' %}">Listado de Solicitudes</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+<div class="container-fluid" style="margin: 50px 0;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 text-justify lead">
+            <div class="title-flat-form" style="margin-bottom: 10px;">Solicitud N° {{ object.pk }}</div>
+            <span><b>Solicitante:</b> &nbsp;{{ object.solicitante.ci }} {{ object.solicitante.get_full_name }}</span>
+            <br>
+            <span>
+                <b>Tipo:</b> &nbsp;
+                {% if object.tipo_solicitud == "1" %} Personal
+                {% elif object.tipo_solicitud == "2" %} Alto Riezgo 
+                {% elif object.tipo_solicitud == "3" %} Salud 
+                {% elif object.tipo_solicitud == "4" %} Institucional
+                {% else %} Tas Haciendo Algo Mal
+                {% endif %}
+            </span>
+            <br>
+            <span><b>Numero De Oficio:</b> &nbsp;{{ object.numero_de_oficio }}</span>
+            <br>
+            <span><b>Remitente: </b> {{ object.remitente }}</span>
+            <br>
+            <span><b>Fecha: </b> {{ object.fecha }}</span>
+            <br>
+            <span><b>Estado: </b> {{ object.estado }}</span>
+            <br>
+            <span><b>Municipio: </b> {{ object.municipio }}</span>
+            <br>
+            <span><b>Parroquia: </b> {{ object.parroquia }}</span>
+            <br>
+            <span><b>Caso Planteado: </b> {{ object.caso_planteado }}</span>
+            <br><br><br>
+            <p class="text-center">
+                <a href="{% url 'solicitudes:update' object.pk %}" class="btn btn-warning btn-lg tooltips-general"
+                    style="margin-right: 10px;" data-toggle="tooltip" data-placement="left" title="Actualizar la Solicitud">
+                    <i class="zmdi zmdi-refresh"></i>
+                    &nbsp;Actualizar Datos
+                </a>
+                <a href="" class="btn btn-danger btn-lg tooltips-general" style="margin-right: 10px;"
+                    data-toggle="tooltip" data-placement="left" title="Eliminar Solicitud">
+                    <i class="zmdi zmdi-delete"></i>
+                    &nbsp;Eliminar
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

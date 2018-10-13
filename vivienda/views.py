@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView
 from usuario.models import Usuario
+from solicitudes.models import Solicitud
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -8,8 +9,9 @@ class Inicio(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Inicio, self).get_context_data(**kwargs)
-        context['usuario'] = Usuario.objects.all().exclude(
+        context['solicitante'] = Usuario.objects.filter(is_solicitante=True).exclude(
             pk=self.request.user.pk).count()
+        context['solicitudes'] = Solicitud.objects.all().count()
         return context
 
 

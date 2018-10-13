@@ -32,14 +32,18 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'usuario.apps.UsuarioConfig',
+    'solicitudes.apps.SolicitudesConfig',
+    'departamento.apps.DepartamentoConfig',
+    'sector_zona.apps.SectorZonaConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'widget_tweaks',
+    'widget_tweaks'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

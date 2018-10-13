@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title_page %}Inicio{% endblock %}
+{% block title_page %} Bienvenido {{user.username}}{% endblock %}
 
 {% block context %}
 <section class="full-reset text-center" style="padding: 40px 0;">
-    <a href="{% url 'usuario:list' %}">
+    <a href="{% url 'solicitudes:list_solicitante' %}">
         <article class="tile">
             <div class="tile-icon full-reset"><i class="zmdi zmdi-face"></i></div>
-            <div class="tile-name all-tittles">Usuarios</div>
-            <div class="tile-num full-reset">{{ usuario }}</div>
+            <div class="tile-name all-tittles">Solicitante</div>
+            <div class="tile-num full-reset">{{ solicitante }}</div>
+        </article>
+    </a>
+    <a href="{% url 'solicitudes:list' %}">
+        <article class="tile">
+            <div class="tile-icon full-reset"><i class="zmdi zmdi-home"></i></div>
+            <div class="tile-name all-tittles">Solicitudes</div>
+            <div class="tile-num full-reset">{{ solicitudes }}</div>
         </article>
     </a>
 </section>

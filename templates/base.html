@@ -55,9 +55,13 @@
 						</div>
 						<ul class="list-unstyled">
 							<li>
-								<a href="{% url 'usuario:register' %}">
+								<a href="{% url 'solicitudes:register_solicitante' %}">
 									<i class="zmdi zmdi-male-alt zmdi-hc-fw"></i>
-									&nbsp;&nbsp; Nuevo Usuario
+									&nbsp;&nbsp; Nuevo Solicitante
+								</a>
+								<a href="{% url 'solicitudes:registrar' %}">
+									<i class="zmdi zmdi-home zmdi-hc-fw"></i>
+									&nbsp;&nbsp; Nueva Solicitudes
 								</a>
 							</li>
 						</ul>
@@ -71,9 +75,13 @@
 						</div>
 						<ul class="list-unstyled">
 							<li>
-								<a href="{% url 'usuario:list' %}">
+								<a href="{% url 'solicitudes:list_solicitante' %}">
 									<i class="zmdi zmdi-male-alt zmdi-hc-fw"></i>
-									&nbsp;&nbsp; Usuarios
+									&nbsp;&nbsp; Solicitante
+								</a>
+								<a href="">
+									<i class="zmdi zmdi-home zmdi-hc-fw"></i>
+									&nbsp;&nbsp; Solicitudes
 								</a>
 							</li>
 						</ul>

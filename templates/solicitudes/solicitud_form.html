@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title_page %}Solicitudes{% endblock %}
+{% block context %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 lead">
+            <ol class="breadcrumb">
+                <li class="active">Solicitudes</li>
+                <li><a href="{% url 'solicitudes:list' %}">Listado Solicitudes</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="container-flat-form">
+        {% if solicitante.exist %}
+        <div class="title-flat-form">Usuario: {{ solicitante.nombre }}</div>
+        {% else %}
+        <div class="title-flat-form">Registrar una nueva solicitud</div>
+        {% endif %}
+        <form autocomplete="off" method="POST">
+                {% for field in form %}
+                    {% if field.errors %}
+                    <div class="group-material">
+                        <div class="alert alert-danger" role="alert">
+                            <span>{{ field.label }}</span> {{ field.errors }}
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                    <div class="group-material">
+                        <span>Solicitante*</span>
+                        {{ form.solicitante|add_class:"material-control tooltips-general"|attr:"data-toggle:tooltip"|attr:"data-toggle:top"|attr:"required:required"|attr:"title:Selecciona el tipo de solicitud"|attr:"autofocus" }}
+                    </div>
+                    <div class="group-material">
+                        <span>Tipo de solicitud*</span>
+                        {{ form.tipo_solicitud|add_class:"material-control tooltips-general"|attr:"data-toggle:tooltip"|attr:"data-toggle:top"|attr:"required:required"|attr:"title:Selecciona el tipo de solicitud"|attr:"autofocus" }}
+                    </div>
+                    <div class="group-material">
+                        {{ form.numero_de_oficio|add_class:"material-control tooltips-general"|attr:"placeholder:Numero de oficio"|attr:"required:required"|attr:"maxlength:60"|attr:"pattern:[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,60}"|attr:"data-toggle:tooltip"|attr:"data-placement:top"|attr:"title:Escribe el codigo de la solicitud" }}
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Numero de oficio*</label>
+                    </div>
+                   <div class="group-material">
+                        <span>Remitente*</span>
+                        {{ form.remitente|add_class:"material-control tooltips-general"|attr:"data-toggle:tooltip"|attr:"data-toggle:top"|attr:"required:required"|attr:"title:Remitente"|attr:"autofocus" }}
+                    </div>
+                    <div class="group-material">
+                        {{ form.fecha|add_class:"material-control tooltips-general"|attr:"placeholder:Fecha De entrega"|attr:"data-toggle:tooltip"|attr:"data-placement:top"|attr:"title:Escribe la Fecha de entrega de la solicitud" }}
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Fecha de entrega</label>
+                        <script>document.querySelector("#id_fecha").type = "date"</script>
+                    </div>
+                    <div class="group-material">
+                        <span>Estado*</span>
+                        {{ form.estado|add_class:"material-control tooltips-general"|attr:"data-toggle:tooltip"|attr:"data-toggle:top"|attr:"required:required"|attr:"title:Selecciona el Estado"|attr:"autofocus" }}
+                    </div>
+                    <div class="group-material">
+                        <span>Municipio*</span>
+                        {{ form.municipio|add_class:"material-control tooltips-general"|attr:"data-toggle:tooltip"|attr:"data-toggle:top"|attr:"required:required"|attr:"title:Selecciona el municipio"|attr:"autofocus" }}
+                    </div>
+                    <div class="group-material">
+                        <span>Parroquia *</span>
+                        {{ form.parroquia|add_class:"material-control tooltips-general"|attr:"data-toggle:tooltip"|attr:"data-toggle:top"|attr:"required:required"|attr:"title:Selecciona la Parroquia"|attr:"autofocus" }}
+                    </div>
+                    <div class="group-material">
+                        {{form.caso_planteado|add_class:"material-control tooltips-general"|attr:"placeholder:Caso planteado"|attr:"data-toggle:tooltip"|attr:"data-placement:top"|attr:"title:Describe el caso de la solicitud"|attr:"col:3" }}
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Caso Planteado</label>
+
+                    </div>
+                   
+                   
+
+                    <p class="text-center">
+                        {% if not user.exist %}
+                        <button type="reset" class="btn btn-success btn-lg" style="margin-right: 20px;">
+                            <i class="zmdi zmdi-roller"></i>
+                            &nbsp;&nbsp; Limpiar
+                        </button>
+                        {% else %}
+                        <a href="{% url 'solicitudes:list' %}" class="btn btn-success btn-lg" style="margin-right: 20px;">
+                            <i class="zmdi zmdi-mail-reply"></i>
+                            &nbsp;Regresar
+                        </a>
+                        {% endif %}
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            <i class="zmdi zmdi-floppy"></i>
+                            &nbsp;Guardar
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+var estado = $("#id_estado");
+var municipio = $("#id_municipio");
+var parroquia = $("#id_parroquia");
+
+estado.change(function() {
+    text = ""
+    $.getJSON( "/sector_zona/api/municipio/" + estado.val(), function( result ) {
+        data = JSON.parse(result);
+        municipio.html(`<option value="" selected="">---------</option>`);
+        for (var i = 0; i < data.length; i++) {
+            value = data[i]
+            text += `
+                <option value=${value.pk}>${value.fields.nombre}</option>
+            `
+        }
+        municipio.append(text)
+    });
+})
+
+municipio.change(function() {
+    text = ""
+    $.getJSON( "/sector_zona/api/parroquia/" + municipio.val(), function( result ) {
+        datamun = JSON.parse(result);
+        parroquia.html(`<option value="" selected="">---------</option>`);
+        for (var i = 0; i < datamun.length; i++) {
+            value = datamun[i]
+            text += `
+                <option value=${value.pk}>${value.fields.nombre}</option>
+            `
+        }
+        parroquia.append(text)
+    });
+})
+</script>
+{% endblock %}
